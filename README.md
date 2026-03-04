@@ -1,4 +1,4 @@
-# Program Management Pipeline
+# Program Management Pipeline Tool
 
 A portable, LLM-powered professional operating system for compliance and security program managers. Encodes expertise into reusable specs, automates routine oversight work, enforces output quality and constitutional alignment, and produces structured outputs you can act on or route to downstream tooling.
 
