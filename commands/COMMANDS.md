@@ -20,6 +20,7 @@
 | `/auditor-view` | Generate read-only auditor compliance dashboard | program |
 | `/provenance-query` | What has the system produced for a program | program |
 | `/meeting-debrief` | Ingest a meeting transcript and update program state | program |
+| `/control-assessment` | Fill auditor template from framework + product docs | program, framework, template, product source |
 
 ---
 
@@ -183,6 +184,28 @@ Arguments:
 
 ---
 
+### `/control-assessment [program]`
+Fills an auditor template, STIG checklist, CIS benchmark, IEC 62443-4-2 assessment, or functional test plan by mapping framework requirements to product documentation. Operates in validated batches with resumability for 100+ control documents. Produces a filled template, markdown artifact, and gap report.
+
+```
+/control-assessment fedramp-high
+/control-assessment iso-42001
+```
+
+Arguments (all prompted if not supplied):
+- `program` — program slug
+- framework type — `iec62443-4-2` `disa-stig` `cis-benchmark` `functional-test-plan` `custom`
+- template path — auditor template file
+- framework document path — the cert or framework document
+- product source — directory, MCP server, URL, or file
+- product name and version
+
+Confirmation points: control inventory count (Phase 0), field mapping for custom templates (Phase 2), consistency resolution if contradictions found (Phase 4).
+
+Resumable: if interrupted, re-run with `RUN_ID` and `RESUME: yes` to continue from the last validated batch.
+
+---
+
 ### `/meeting-debrief [program]`
 Ingests a meeting transcript from `data/[program]/materials/meeting-debrief.md` and extracts all compliance-relevant signal. Decisions and session notes write automatically to the memory file. Action items, control updates, new risks, and date commitments are staged and confirmed before touching the run JSON.
 
@@ -229,5 +252,6 @@ Suggested file naming:
 .cursor/commands/intel-scan.md
 .cursor/commands/auditor-view.md
 .cursor/commands/provenance-query.md
+.cursor/commands/control-assessment.md
 .cursor/commands/meeting-debrief.md
 ```
