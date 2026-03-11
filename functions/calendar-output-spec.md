@@ -108,7 +108,7 @@ All events are scheduled as 1-hour blocks unless the activity type indicates oth
 | `milestone` | 1 hour | Review and sign-off block |
 | `other` | 1 hour | Default |
 
-Set `DTEND` based on `DTSTART` + duration. For all-day events where time is not specified, schedule at 09:00 local and end at start + duration.
+Set `DTEND` based on `DTSTART` + duration. For all-day events where time is not specified, schedule at 09:00 local and end at start + duration. Do not overlap events, respect the fact that people cannot attend two events at the same time. Conflicting events should be scheduled the day prior to an event they would overlap.
 
 ---
 
